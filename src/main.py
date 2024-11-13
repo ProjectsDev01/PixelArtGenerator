@@ -7,9 +7,6 @@ from skimage.transform import resize
 from sklearn.preprocessing import LabelEncoder
 import kagglehub
 
-# Pobranie datasetu
-# path = kagglehub.dataset_download("ebrahimelgazar/pixel-art")
-# print("Path to dataset files:", path)
 
 # Załaduj obrazy i etykiety
 images = np.load("./images/sprites.npy")  # 
