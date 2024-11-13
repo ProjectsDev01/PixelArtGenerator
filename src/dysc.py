@@ -12,5 +12,5 @@ class Discriminator(nn.Module):
         x = F.leaky_relu(self.fc1(x), 0.2)
         x = F.leaky_relu(self.fc2(x), 0.2)
         x = F.leaky_relu(self.fc3(x), 0.2)
-        x = torch.sigmoid(self.fc4(x))  # Wyjście prawdopodobieństwa
+        x = torch.sigmoid(self.fc4(x))  #
         return x
