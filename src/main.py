@@ -12,8 +12,8 @@ import kagglehub
 # print("Path to dataset files:", path)
 
 # Załaduj obrazy i etykiety
-images = np.load("./images/sprites.npy")  # Zmodyfikuj tę linię zgodnie z rzeczywistą strukturą pliku
-labels_df = pd.read_csv("./images/labels.csv")  # Zmodyfikuj tę linię zgodnie z rzeczywistą nazwą pliku
+images = np.load("./images/sprites.npy")  # 
+labels_df = pd.read_csv("./images/labels.csv")  
 
 # Zakodowanie etykiet
 label_encoder = LabelEncoder()
@@ -21,7 +21,7 @@ labels_encoded = label_encoder.fit_transform(labels_df['description'])
 num_classes = len(np.unique(labels_encoded))
 labels_one_hot = np.eye(num_classes)[labels_encoded]
 
-# Resize images to a fixed size (32x32)
+
 resized_images = np.array([resize(image, (16, 16)) for image in images])
 normalized_images = resized_images / 255.0  # Normalizacja
 
