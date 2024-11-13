@@ -1,7 +1,7 @@
 class Discriminator(nn.Module):
     def __init__(self, text_dim, img_channels=3):
         super(Discriminator, self).__init__()
-        self.fc1 = nn.Linear(img_channels * 64 * 64 + text_dim, 1024)
+        self.fc1 = nn.Linear(img_channels * 16 * 16 + text_dim, 1024)
         self.fc2 = nn.Linear(1024, 512)
         self.fc3 = nn.Linear(512, 256)
         self.fc4 = nn.Linear(256, 1)

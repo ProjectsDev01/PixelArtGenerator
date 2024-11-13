@@ -16,5 +16,5 @@ class Generator(nn.Module):
         x = F.relu(self.fc2(x))
         x = F.relu(self.fc3(x))
         x = torch.tanh(self.fc4(x))  # Normalizacja obrazu
-        x = x.view(x.size(0), 3, 16, 16)  # Zamiana na obraz 64x64
+        x = x.view(x.size(0), 3, 16, 16)  # Zamiana na obraz 16x16
         return x

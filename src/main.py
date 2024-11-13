@@ -8,12 +8,12 @@ from sklearn.preprocessing import LabelEncoder
 import kagglehub
 
 # Pobranie datasetu
-path = kagglehub.dataset_download("ebrahimelgazar/pixel-art")
-print("Path to dataset files:", path)
+# path = kagglehub.dataset_download("ebrahimelgazar/pixel-art")
+# print("Path to dataset files:", path)
 
 # Załaduj obrazy i etykiety
-images = np.load(f"{path}/images.npy")  # Zmodyfikuj tę linię zgodnie z rzeczywistą strukturą pliku
-labels_df = pd.read_csv(f"{path}/labels.csv")  # Zmodyfikuj tę linię zgodnie z rzeczywistą nazwą pliku
+images = np.load("./images/sprites.npy")  # Zmodyfikuj tę linię zgodnie z rzeczywistą strukturą pliku
+labels_df = pd.read_csv("./images/labels.csv")  # Zmodyfikuj tę linię zgodnie z rzeczywistą nazwą pliku
 
 # Zakodowanie etykiet
 label_encoder = LabelEncoder()
@@ -22,7 +22,7 @@ num_classes = len(np.unique(labels_encoded))
 labels_one_hot = np.eye(num_classes)[labels_encoded]
 
 # Resize images to a fixed size (32x32)
-resized_images = np.array([resize(image, (32, 32)) for image in images])
+resized_images = np.array([resize(image, (16, 16)) for image in images])
 normalized_images = resized_images / 255.0  # Normalizacja
 
 # Funkcje do budowy generatora i dyskryminatora
