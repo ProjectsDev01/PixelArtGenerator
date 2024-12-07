@@ -5,41 +5,70 @@ pobrany dataset, sprawdzone w nim wartości (brak błędów, nullów)\
 Stworzone drzewo projektu do uczenia\
 W tym proste gui z możliwością wpisywania i generowania obrazu
 Api do gui(wprowadzane dane są przekazywane, obraz jest pobierany)\
-Pobranie condy
-
-<p align="center">
-    <img src="./images/images/image.png" width = 1200>
-</p>
-
-Zainstalowane środowisko conda
+Generowanie działa na localhoście
 
 ## ToDo
 
+badania
+Potencjalna zmiana na model GAN z autoencodera
 
-Problem jest z wczytywaniem danych z bazy\
-Nauczyć za pomocą cudy sieć(można bez, ale może to zająć dużo czasu przy 89k obrazów)
 
-# NEWEST ERROR
+### Trenowanie modelu
+autoencoder.fit(\
+    sprites_normalized,  # dane wejściowe\
+    sprites_normalized,  # dane wyjściowe (rekonstrukcja)\
+    epochs=20,\
+    batch_size=342,\
+    validation_split=0.2\
+)
 
-    Traceback (most recent call last):
-  File "C:\Users\barto\.conda\envs\myenv\Lib\site-packages\pandas\core\indexes\base.py", line 3805, in get_loc
-    return self._engine.get_loc(casted_key)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
-  File "index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
-  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7081, in pandas._libs.hashtable.PyObjectHashTable.get_item
-  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7089, in pandas._libs.hashtable.PyObjectHashTable.get_item
-KeyError: 'description'
+<img src="./images/test_pixelart.png" alt="Opis obrazka" width="350" />
 
-The above exception was the direct cause of the following exception:
 
-Traceback (most recent call last):
-  File "D:\test_folder\gsp\src\main.py", line 20, in <module>
-    labels_encoded = label_encoder.fit_transform(labels_df['description'])
-                                                 ~~~~~~~~~^^^^^^^^^^^^^^^
-  File "C:\Users\barto\.conda\envs\myenv\Lib\site-packages\pandas\core\frame.py", line 4102, in __getitem__
-    indexer = self.columns.get_loc(key)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\barto\.conda\envs\myenv\Lib\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
-    raise KeyError(key) from err
-KeyError: 'description'
+autoencoder.fit(\
+    sprites_normalized,  # dane wejściowe\
+    sprites_normalized,  # dane wyjściowe (rekonstrukcja)\
+    epochs=300,\
+    batch_size=32,\
+    validation_split=0.2\
+)
+
+<img src="./images/testv2_pixelart.png" alt="Opis obrazka" width="350" />
+
+sprawdzenie jakości obrazu (czy na podstawei prostej miary/błąd średniokwadratowy)
+
+##
+Po zmianie skalowania 
+
+autoencoder.fit(\
+sprites_normalized, # dane wejściowe\
+sprites_normalized, # dane wyjściowe (rekonstrukcja)\
+epochs=20,\
+batch_size=32,\
+validation_split=0.2\
+)
+
+<img src="./images/after_scaling.png" alt="Opis obrazka" width="350" />
+
+
+<img src="./images/loss_dt.png" alt="Opis obrazka" 
+width="350" />
+
+## Model Gan
+
+# Parametry
+history = autoencoder.fit(\
+    sprites_normalized,  # dane wejściowe\
+    sprites_normalized,  # dane wyjściowe (rekonstrukcja)\
+    epochs=10,\
+    batch_size=64,\
+    validation_split=0.2,\
+    verbose=0,  # wyłączamy domyślną wizualizację\
+    callbacks=[TrainingLogger()]  # Dodajemy nasz logger\
+)
+
+<img src="./images/gan_loss.png" alt="Opis obrazka" 
+width="350" />
+
+<img src="./images/first_try_GAN.png" alt="Opis obrazka" 
+width="350" />
